@@ -5,7 +5,7 @@ import androidx.paging.PagingState
 import retrofit2.HttpException
 import java.io.IOException
 
-class NewsPagingSource(val newsApi: NewsApi) :
+class NewsPagingSource(private val newsApi: NewsApi) :
     PagingSource<Int, NewsItem>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, NewsItem> {

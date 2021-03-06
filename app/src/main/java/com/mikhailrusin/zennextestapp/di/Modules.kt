@@ -2,6 +2,7 @@ package com.mikhailrusin.zennextestapp.di
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.mikhailrusin.zennextestapp.data.Repository
+import com.mikhailrusin.zennextestapp.data.RepositoryImpl
 import com.mikhailrusin.zennextestapp.data.network.NewsApi
 import com.mikhailrusin.zennextestapp.ui.NewsViewModel
 import com.mikhailrusin.zennextestapp.util.Constants
@@ -21,7 +22,7 @@ val appModule = module {
     factory { provideRetrofit(get(), get()) }
     single { provideNewsApi(get()) }
 
-    single { Repository(get()) }
+    single<Repository> { RepositoryImpl(get()) }
     viewModel { NewsViewModel(get()) }
 }
 
