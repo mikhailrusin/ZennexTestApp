@@ -1,5 +1,4 @@
 <resources>
     <string name="app_name">ZennexTestApp</string>
     <string name="retry">Retry</string>
-    <string name="error">Something went wrong. Try again</string>
 </resources>

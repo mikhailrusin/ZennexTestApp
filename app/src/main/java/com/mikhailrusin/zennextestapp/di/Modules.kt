@@ -4,7 +4,7 @@ import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterF
 import com.mikhailrusin.zennextestapp.data.Repository
 import com.mikhailrusin.zennextestapp.data.RepositoryImpl
 import com.mikhailrusin.zennextestapp.data.network.NewsApi
-import com.mikhailrusin.zennextestapp.ui.NewsViewModel
+import com.mikhailrusin.zennextestapp.ui.news_list.NewsViewModel
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient

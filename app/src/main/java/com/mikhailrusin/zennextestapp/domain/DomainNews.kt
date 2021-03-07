@@ -1,10 +1,6 @@
-package com.mikhailrusin.zennextestapp.data.network
+package com.mikhailrusin.zennextestapp.domain
 
-class NewsResponse(
-    val articles: List<ArticleDTO>
-)
-
-data class ArticleDTO(
+data class DomainNews (
     val title: String?,
     val description: String,
     val url: String,

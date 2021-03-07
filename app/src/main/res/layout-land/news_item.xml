@@ -6,10 +6,11 @@
     <data>
         <variable
             name="news"
-            type="com.mikhailrusin.zennextestapp.data.network.NewsItem" />
+            type="com.mikhailrusin.zennextestapp.domain.DomainNews" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/news_container"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:background="@drawable/background_news"
@@ -37,7 +38,7 @@
             android:layout_height="0dp"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="8dp"
-            android:layout_marginHorizontal="16dp"
+            android:layout_marginEnd="16dp"
             android:adjustViewBounds="true"
             app:bindImage="@{news.urlToImage}"
             app:layout_constraintEnd_toEndOf="parent"
@@ -58,6 +59,8 @@
             android:text="@{news.description}"
             android:textAppearance="?attr/textAppearanceBody1"
             app:layout_constrainedWidth="true"
+            app:layout_constraintVertical_bias="0"
+            app:layout_constraintHorizontal_bias="0"
             app:layout_constraintBottom_toTopOf="@id/news_date"
             app:layout_constraintEnd_toStartOf="@+id/news_image"
             app:layout_constraintStart_toStartOf="parent"
