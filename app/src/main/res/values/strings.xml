@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">ZennexTestApp</string>
     <string name="retry">Retry</string>
+    <string name="connection_error">No internet connection. Please try again</string>
 </resources>

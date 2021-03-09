@@ -2,6 +2,7 @@ package com.mikhailrusin.zennextestapp.data.network
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.mikhailrusin.zennextestapp.data.network.dto.ArticleDTO
 import retrofit2.HttpException
 import java.io.IOException
 

@@ -1,6 +1,6 @@
 package com.mikhailrusin.zennextestapp.util
 
-import com.mikhailrusin.zennextestapp.data.network.ArticleDTO
+import com.mikhailrusin.zennextestapp.data.network.dto.ArticleDTO
 import com.mikhailrusin.zennextestapp.domain.DomainNews
 
 fun ArticleDTO.toDomainNews(): DomainNews {

@@ -1,4 +1,4 @@
-package com.mikhailrusin.zennextestapp.ui.adapter
+package com.mikhailrusin.zennextestapp.ui.news_list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -11,8 +11,8 @@ import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.mikhailrusin.zennextestapp.R
 import com.mikhailrusin.zennextestapp.databinding.LoadStateItemBinding
-
 class LoadingStateAdapter(
+    private val errorMessage: String,
     private val retry: () -> Unit
 ) : LoadStateAdapter<LoadingStateAdapter.LoadStateViewHolder>() {
 
@@ -23,16 +23,17 @@ class LoadingStateAdapter(
         val inflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.load_state_item, parent, false)
         val binding = LoadStateItemBinding.bind(view)
-        return LoadStateViewHolder(binding, retry)
+        return LoadStateViewHolder(errorMessage, binding, retry)
     }
 
     override fun onBindViewHolder(
-        holder: LoadStateViewHolder,
-        loadState: LoadState
+            holder: LoadStateViewHolder,
+            loadState: LoadState
     ) = holder.bind(loadState)
 
 
     class LoadStateViewHolder(
+        private val errorMessage: String,
         binding: LoadStateItemBinding,
         retry: () -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
@@ -45,7 +46,7 @@ class LoadingStateAdapter(
 
         fun bind(loadState: LoadState) {
             if (loadState is LoadState.Error) {
-                errorMsg.text = loadState.error.localizedMessage
+                errorMsg.text = errorMessage
             }
 
             progressBar.isVisible = loadState is LoadState.Loading

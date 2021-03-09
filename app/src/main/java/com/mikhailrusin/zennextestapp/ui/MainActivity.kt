@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
 import com.mikhailrusin.zennextestapp.R
-import com.mikhailrusin.zennextestapp.ui.factory.NewsFragmentFactory
+import com.mikhailrusin.zennextestapp.ui.common.factory.NewsFragmentFactory
 import com.mikhailrusin.zennextestapp.ui.news_list.NewsListFragment
 
 class MainActivity : AppCompatActivity() {

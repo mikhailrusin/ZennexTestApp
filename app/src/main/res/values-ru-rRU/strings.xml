@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ZennexTestApp</string>
+    <string name="retry">Повторить</string>
+    <string name="connection_error">Нет интернет-соединения. Пожалуйста, повторите ещё раз</string>
+</resources>

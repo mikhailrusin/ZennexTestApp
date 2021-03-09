@@ -1,8 +1,4 @@
-package com.mikhailrusin.zennextestapp.data.network
-
-class NewsResponse(
-    val articles: List<ArticleDTO>
-)
+package com.mikhailrusin.zennextestapp.data.network.dto
 
 data class ArticleDTO(
     val title: String?,

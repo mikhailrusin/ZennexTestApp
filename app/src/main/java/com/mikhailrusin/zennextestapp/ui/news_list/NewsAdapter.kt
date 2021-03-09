@@ -1,4 +1,4 @@
-package com.mikhailrusin.zennextestapp.ui.adapter
+package com.mikhailrusin.zennextestapp.ui.news_list
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,22 +8,21 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.mikhailrusin.zennextestapp.databinding.NewsItemBinding
 import com.mikhailrusin.zennextestapp.domain.DomainNews
-import com.mikhailrusin.zennextestapp.ui.news_list.NewsClickListener
 
 class NewsAdapter(
     private val clickListener: NewsClickListener
-) : PagingDataAdapter<DomainNews, NewsAdapter.GameViewHolder>(NewsComparator) {
+) : PagingDataAdapter<DomainNews, NewsAdapter.NewsViewHolder>(NewsComparator) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GameViewHolder {
-        return GameViewHolder.from(parent, clickListener)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
+        return NewsViewHolder.from(parent, clickListener)
     }
 
-    override fun onBindViewHolder(holder: GameViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
         getItem(position)?.let { holder.bind(it) }
     }
 
 
-    class GameViewHolder private constructor(
+    class NewsViewHolder private constructor(
         private val binding: NewsItemBinding,
         private val clickListener: NewsClickListener
     ) : RecyclerView.ViewHolder(binding.root),
@@ -42,10 +41,10 @@ class NewsAdapter(
         }
 
         companion object {
-            fun from(parent: ViewGroup, clickListener: NewsClickListener): GameViewHolder {
+            fun from(parent: ViewGroup, clickListener: NewsClickListener): NewsViewHolder {
                 val inflater = LayoutInflater.from(parent.context)
                 val binding = NewsItemBinding.inflate(inflater, parent, false)
-                return GameViewHolder(binding, clickListener)
+                return NewsViewHolder(binding, clickListener)
             }
         }
     }

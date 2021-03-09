@@ -7,8 +7,6 @@ import androidx.fragment.app.commit
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mikhailrusin.zennextestapp.R
-import com.mikhailrusin.zennextestapp.ui.adapter.LoadingStateAdapter
-import com.mikhailrusin.zennextestapp.ui.adapter.NewsAdapter
 import com.mikhailrusin.zennextestapp.ui.news_overview.NewsOverviewFragment
 import kotlinx.android.synthetic.main.fragment_news_list.*
 import kotlinx.coroutines.flow.collectLatest
@@ -36,11 +34,15 @@ class NewsListFragment : Fragment(R.layout.fragment_news_list) {
         }
 
         val adapter = NewsAdapter(collageClickListener)
-        recycler_news.adapter = adapter.withLoadStateFooter(LoadingStateAdapter(adapter::retry))
-        viewLifecycleOwner.lifecycleScope.launch {
-            newsViewModel.fetchNews().distinctUntilChanged().collectLatest {
+        recycler_news.adapter = adapter.withLoadStateFooter(
+            LoadingStateAdapter(
+                resources.getString(R.string.connection_error),
+                adapter::retry)
+        )
+        newsViewModel.fetchNews().observe(viewLifecycleOwner, {
+            viewLifecycleOwner.lifecycleScope.launch {
                 adapter.submitData(it)
             }
-        }
+        })
     }
 }

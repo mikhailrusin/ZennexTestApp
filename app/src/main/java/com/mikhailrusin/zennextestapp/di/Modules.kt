@@ -1,10 +1,11 @@
 package com.mikhailrusin.zennextestapp.di
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.mikhailrusin.zennextestapp.data.Repository
+import com.mikhailrusin.zennextestapp.domain.Repository
 import com.mikhailrusin.zennextestapp.data.RepositoryImpl
 import com.mikhailrusin.zennextestapp.data.network.NewsApi
 import com.mikhailrusin.zennextestapp.ui.news_list.NewsViewModel
+import com.mikhailrusin.zennextestapp.util.Constants.BASE_URL
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
@@ -14,7 +15,6 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-const val BASE_URL = "https://newsapi.org/"
 
 val appModule = module {
     factory { provideMoshi() }

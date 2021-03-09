@@ -11,7 +11,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/news_container"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/background_news"
         android:elevation="8dp"
@@ -32,18 +32,30 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
+
+        <TextView
+            android:id="@+id/news_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            bindDate="@{news.publishedAt}"
+            android:textAppearance="?attr/textAppearanceCaption"
+            app:layout_constraintStart_toStartOf="@+id/news_title"
+            app:layout_constraintTop_toBottomOf="@+id/news_title"
+            tools:text="@tools:sample/date/ddmmyy" />
+
         <ImageView
             android:id="@+id/news_image"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginHorizontal="40dp"
-            android:scaleType="fitCenter"
             android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
             app:bindImage="@{news.urlToImage}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/news_title"
+            app:layout_constraintTop_toBottomOf="@+id/news_date"
             tools:src="@drawable/splash" />
 
         <androidx.constraintlayout.widget.Barrier
@@ -51,7 +63,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:barrierDirection="bottom"
-            app:constraint_referenced_ids="news_title, news_image" />
+            app:constraint_referenced_ids="news_date, news_image" />
 
         <TextView
             android:id="@+id/news_description"
@@ -66,20 +78,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/title_bottom_barrier"
-            app:layout_constraintBottom_toTopOf="@id/news_date"
+            app:layout_constraintBottom_toBottomOf="parent"
             tools:text="@tools:sample/lorem/random" />
-
-        <TextView
-            android:id="@+id/news_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{news.publishedAt}"
-            tools:text="@tools:sample/date/ddmmyy"
-            android:textAppearance="?attr/textAppearanceCaption"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

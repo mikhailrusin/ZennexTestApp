@@ -4,9 +4,10 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.mikhailrusin.zennextestapp.data.network.ArticleDTO
+import com.mikhailrusin.zennextestapp.data.network.dto.ArticleDTO
 import com.mikhailrusin.zennextestapp.data.network.NewsApi
 import com.mikhailrusin.zennextestapp.data.network.NewsPagingSource
+import com.mikhailrusin.zennextestapp.domain.Repository
 import kotlinx.coroutines.flow.Flow
 
 class RepositoryImpl(
