@@ -2,5 +2,8 @@
 <resources>
     <string name="app_name">ZennexTestApp</string>
     <string name="retry">Повторить</string>
-    <string name="connection_error">Нет интернет-соединения. Пожалуйста, повторите ещё раз</string>
+    <string name="connection_error">Отсутствует интернет-соединение. Повторите заново</string>
+    <string name="news">Новости</string>
+    <string name="map">Карта</string>
+    <string name="pick_image">Выберите изображение</string>
 </resources>

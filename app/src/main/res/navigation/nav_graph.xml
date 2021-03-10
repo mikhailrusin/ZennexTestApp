@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph"
+    app:startDestination="@id/newsListFragment">
+
+    <fragment
+        android:id="@+id/newsListFragment"
+        android:name="com.mikhailrusin.zennextestapp.ui.news_list.NewsListFragment"
+        android:label="@string/news" >
+        <action
+            android:id="@+id/action_newsListFragment_to_newsOverviewFragment"
+            app:destination="@id/newsOverviewFragment" />
+        <action
+            android:id="@+id/action_newsListFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
+        <action
+            android:id="@+id/action_newsListFragment_to_imageFragment"
+            app:destination="@id/imageFragment"
+            app:launchSingleTop="false"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/imageFragment"
+        android:name="com.mikhailrusin.zennextestapp.ui.image_pick.ImagePickFragment"
+        android:label="@string/pick_image" />
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.mikhailrusin.zennextestapp.ui.map.MapFragment"
+        android:label="@string/map" />
+    <fragment
+        android:id="@+id/newsOverviewFragment"
+        android:name="com.mikhailrusin.zennextestapp.ui.news_overview.NewsOverviewFragment"
+        android:label="NewsOverviewFragment" >
+        <argument
+            android:name="url"
+            app:argType="string" />
+    </fragment>
+</navigation>

@@ -3,11 +3,10 @@ package com.mikhailrusin.zennextestapp.ui.news_list
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.commit
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mikhailrusin.zennextestapp.R
-import com.mikhailrusin.zennextestapp.ui.news_overview.NewsOverviewFragment
 import kotlinx.android.synthetic.main.fragment_news_list.*
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -24,11 +23,7 @@ class NewsListFragment : Fragment(R.layout.fragment_news_list) {
             val bundle = Bundle().apply {
                 putString("url", it)
             }
-            val tag = this.tag
-            activity?.supportFragmentManager?.commit {
-                addToBackStack(tag)
-                replace(R.id.fragment_container, NewsOverviewFragment::class.java, bundle)
-            }
+            findNavController().navigate(R.id.action_newsListFragment_to_newsOverviewFragment, bundle)
         }
 
         val adapter = NewsAdapter(collageClickListener)

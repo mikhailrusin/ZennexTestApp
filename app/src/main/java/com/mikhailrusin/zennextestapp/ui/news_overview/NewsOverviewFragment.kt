@@ -15,24 +15,22 @@ class NewsOverviewFragment : Fragment(R.layout.fragment_news_overview) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        arguments?.let { bundle ->
-            bundle.getString("url")?.let { url ->
-                news_url.text = url
-                newsUrl = url
-                web_view.apply {
-                    loadUrl(url)
-                    webViewClient = WebViewClient()
-                    webChromeClient = object : WebChromeClient() {
-                        override fun onProgressChanged(view: WebView?, newProgress: Int) {
-                            if (progress < 100 && news_progressbar.visibility == View.GONE) {
-                                news_progressbar.visibility = View.VISIBLE
-                                pageLoading()
-                            }
-                            news_progressbar.progress = progress
-                            if (progress == 100) {
-                                news_progressbar.visibility = View.GONE
-                                pageLoadFinished()
-                            }
+        arguments?.getString("url")?.let { url ->
+            news_url.text = url
+            newsUrl = url
+            web_view.apply {
+                loadUrl(url)
+                webViewClient = WebViewClient()
+                webChromeClient = object : WebChromeClient() {
+                    override fun onProgressChanged(view: WebView?, newProgress: Int) {
+                        if (progress < 100 && news_progressbar.visibility == View.GONE) {
+                            news_progressbar.visibility = View.VISIBLE
+                            pageLoading()
+                        }
+                        news_progressbar.progress = progress
+                        if (progress == 100) {
+                            news_progressbar.visibility = View.GONE
+                            pageLoadFinished()
                         }
                     }
                 }

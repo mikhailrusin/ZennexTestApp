@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">ZennexTestApp</string>
     <string name="retry">Retry</string>
-    <string name="connection_error">No internet connection. Please try again</string>
+    <string name="connection_error">No internet connection. Try again</string>
+    <string name="news">News</string>
+    <string name="map">Map</string>
+    <string name="pick_image">Pick image</string>
 </resources>
