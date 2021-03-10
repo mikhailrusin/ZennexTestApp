@@ -9,8 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.mikhailrusin.zennextestapp.R
 import com.mikhailrusin.zennextestapp.ui.news_overview.NewsOverviewFragment
 import kotlinx.android.synthetic.main.fragment_news_list.*
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

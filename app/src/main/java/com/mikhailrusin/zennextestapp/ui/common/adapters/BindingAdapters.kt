@@ -1,6 +1,5 @@
 package com.mikhailrusin.zennextestapp.ui.common.adapters
 
-import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
