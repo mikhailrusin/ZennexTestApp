@@ -18,4 +18,5 @@ class NewsViewModel(private val repository: Repository) : ViewModel() {
         .map { it.map { it.toDomainNews() } }
         .asLiveData(Dispatchers.Default)
         .cachedIn(viewModelScope)
+
 }

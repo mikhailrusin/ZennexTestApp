@@ -6,14 +6,17 @@ import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.mikhailrusin.zennextestapp.R
 import kotlinx.android.synthetic.main.fragment_news_overview.*
 import kotlinx.android.synthetic.main.news_overview_toolbar.*
 
 class NewsOverviewFragment : Fragment(R.layout.fragment_news_overview) {
     private var newsUrl: String? = null
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        activity?.toolbar?.visibility = View.GONE
 
         arguments?.getString("url")?.let { url ->
             news_url.text = url
@@ -22,14 +25,14 @@ class NewsOverviewFragment : Fragment(R.layout.fragment_news_overview) {
                 loadUrl(url)
                 webViewClient = WebViewClient()
                 webChromeClient = object : WebChromeClient() {
-                    override fun onProgressChanged(view: WebView?, newProgress: Int) {
-                        if (progress < 100 && news_progressbar.visibility == View.GONE) {
-                            news_progressbar.visibility = View.VISIBLE
+                    override fun onProgressChanged(view: WebView?, progress: Int) {
+                        if (progress < 100 && news_progressbar?.visibility == View.GONE) {
+                            news_progressbar?.visibility = View.VISIBLE
                             pageLoading()
                         }
-                        news_progressbar.progress = progress
+                        news_progressbar?.progress = progress
                         if (progress == 100) {
-                            news_progressbar.visibility = View.GONE
+                            news_progressbar?.visibility = View.GONE
                             pageLoadFinished()
                         }
                     }
@@ -37,7 +40,8 @@ class NewsOverviewFragment : Fragment(R.layout.fragment_news_overview) {
             }
         }
         button_back.setOnClickListener {
-            activity?.supportFragmentManager?.popBackStack()
+            web_view.stopLoading()
+            findNavController().navigateUp()
         }
         button_reload.setOnClickListener {
             web_view.loadUrl(newsUrl)
@@ -50,12 +54,12 @@ class NewsOverviewFragment : Fragment(R.layout.fragment_news_overview) {
     }
 
     private fun pageLoadFinished() {
-        button_reload.visibility = View.VISIBLE
-        button_cancel.visibility = View.GONE
+        button_reload?.visibility = View.VISIBLE
+        button_cancel?.visibility = View.GONE
     }
 
     private fun pageLoading() {
-        button_reload.visibility = View.GONE
-        button_cancel.visibility = View.VISIBLE
+        button_reload?.visibility = View.GONE
+        button_cancel?.visibility = View.VISIBLE
     }
 }

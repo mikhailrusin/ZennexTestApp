@@ -7,12 +7,14 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mikhailrusin.zennextestapp.R
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_news_list.*
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NewsListFragment : Fragment(R.layout.fragment_news_list) {
     private val newsViewModel: NewsViewModel by viewModel()
+    private lateinit var adapter: NewsAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -23,10 +25,10 @@ class NewsListFragment : Fragment(R.layout.fragment_news_list) {
             val bundle = Bundle().apply {
                 putString("url", it)
             }
-            findNavController().navigate(R.id.action_newsListFragment_to_newsOverviewFragment, bundle)
+            findNavController().navigate(R.id.newsOverviewFragment, bundle)
         }
 
-        val adapter = NewsAdapter(collageClickListener)
+        adapter = NewsAdapter(collageClickListener)
         recycler_news.adapter = adapter.withLoadStateFooter(
             LoadingStateAdapter(
                 resources.getString(R.string.connection_error),
@@ -34,8 +36,22 @@ class NewsListFragment : Fragment(R.layout.fragment_news_list) {
         )
         newsViewModel.fetchNews().observe(viewLifecycleOwner, {
             viewLifecycleOwner.lifecycleScope.launch {
-                adapter.submitData(it)
+                it?.let { adapter.submitData(it) }
             }
         })
+        swipe_refresh.setOnRefreshListener {
+            refreshNews()
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        activity?.toolbar?.visibility = View.VISIBLE
+    }
+
+    fun refreshNews() {
+        swipe_refresh.isRefreshing = true
+        adapter.refresh()
+        swipe_refresh.isRefreshing = false
     }
 }

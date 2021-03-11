@@ -15,9 +15,7 @@
             app:destination="@id/mapFragment" />
         <action
             android:id="@+id/action_newsListFragment_to_imageFragment"
-            app:destination="@id/imageFragment"
-            app:launchSingleTop="false"
-            app:popUpToInclusive="false" />
+            app:destination="@id/imageFragment" />
     </fragment>
     <fragment
         android:id="@+id/imageFragment"
