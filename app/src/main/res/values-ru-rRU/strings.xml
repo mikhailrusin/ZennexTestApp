@@ -7,4 +7,5 @@
     <string name="map">Карта</string>
     <string name="pick_image">Выберите изображение</string>
     <string name="refresh">Обновить</string>
+    <string name="grant_failure">Вам нужно дать доступ к файлам, чтобы выбрать фотографию</string>
 </resources>

@@ -1,9 +1,6 @@
 package com.mikhailrusin.zennextestapp.ui.news_list
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.map
@@ -14,9 +11,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
 
 class NewsViewModel(private val repository: Repository) : ViewModel() {
-    fun fetchNews(): LiveData<PagingData<DomainNews>> = repository.fetchNews()
-        .map { it.map { it.toDomainNews() } }
-        .asLiveData(Dispatchers.Default)
-        .cachedIn(viewModelScope)
+    val isLoading = MutableLiveData(false)
 
+    fun fetchNews(): LiveData<PagingData<DomainNews>> {
+        isLoading.value = true
+        return repository.fetchNews()
+            .map { it.map { it.toDomainNews() } }
+            .asLiveData(Dispatchers.Default)
+            .cachedIn(viewModelScope)
+    }
 }

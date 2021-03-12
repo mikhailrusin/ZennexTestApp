@@ -14,8 +14,4 @@
         <item name="android:windowBackground">@drawable/splash</item>
         <item name="android:statusBarColor">@color/black</item>
     </style>
-
-    <style name="MyProgressBar" parent="Widget.AppCompat.ProgressBar.Horizontal">
-        <item name="android:progressTint">@color/black</item>
-    </style>
 </resources>

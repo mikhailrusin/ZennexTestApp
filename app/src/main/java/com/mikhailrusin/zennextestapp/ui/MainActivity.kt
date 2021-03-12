@@ -1,16 +1,48 @@
 package com.mikhailrusin.zennextestapp.ui
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.FileProvider
 import androidx.navigation.findNavController
 import com.mikhailrusin.zennextestapp.R
 import com.mikhailrusin.zennextestapp.ui.news_list.NewsListFragment
 import kotlinx.android.synthetic.main.activity_main.*
+import java.io.File
+import java.text.SimpleDateFormat
+import java.util.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), ImageHandleListener {
     private var hideMenu = false
+    private var uriToImageFromCamera: Uri? = null
+
+    private val pickImageFromGallery =
+        registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+            uri?.let { handleImage(it) }
+        }
+
+    private val takePictureWithCamera =
+        registerForActivityResult(ActivityResultContracts.TakePicture()) { success ->
+            if (success) {
+                uriToImageFromCamera?.let { handleImage(it) }
+            }
+        }
+
+    private val requestPermissions =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+            if (isGranted) {
+                getImageFromGallery()
+            } else {
+                onPermissionRequestFailure()
+            }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
@@ -45,10 +77,60 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onBackPressed() {
-        if (!findNavController(R.id.nav_host_fragment).popBackStack()) {
-            super.onBackPressed()
+    private fun isStoragePermissionGranted() =
+        checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) ==
+                PackageManager.PERMISSION_GRANTED
+
+    private fun isCameraPermissionGranted() =
+        checkSelfPermission(Manifest.permission.CAMERA) ==
+                PackageManager.PERMISSION_GRANTED
+
+
+    override fun requestImageFromGallery() {
+        if (isStoragePermissionGranted()) {
+            getImageFromGallery()
+        } else {
+            requestStoragePermission()
         }
+    }
+
+    override fun requestImageFromCamera() {
+        if (isCameraPermissionGranted()) {
+            getImageFromCamera()
+        } else {
+            requestCameraPermission()
+        }
+    }
+
+    private fun requestStoragePermission() {
+        requestPermissions.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+    }
+
+    private fun requestCameraPermission() {
+        requestPermissions.launch(Manifest.permission.CAMERA)
+    }
+
+    private fun onPermissionRequestFailure() {
+        val message = resources.getString(R.string.grant_failure)
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+    }
+
+    private fun getImageFromGallery() {
+        pickImageFromGallery.launch("image/*")
+    }
+
+    private fun getImageFromCamera() {
+//        val date = SimpleDateFormat.getDateTimeInstance().format(Date())
+//        val file = File("$filesDir/$date.jpg")
+//        val uri = FileProvider.getUriForFile(this, "file_provider", file)
+//        takePictureWithCamera.launch(uri)
+//        uriToImageFromCamera = uri
+    }
+
+    private fun handleImage(uri: Uri) {
+        Toast.makeText(this, uri.toString(), Toast.LENGTH_SHORT).show()
+        // совершить переход на новый фрагмент, передать ему url и загрузить картинку
+//        (supportFragmentManager.fragments.last() as EditCollageFragment).uploadImage(uri)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -68,6 +150,12 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    override fun onBackPressed() {
+        if (!findNavController(R.id.nav_host_fragment).popBackStack()) {
+            super.onBackPressed()
         }
     }
 }

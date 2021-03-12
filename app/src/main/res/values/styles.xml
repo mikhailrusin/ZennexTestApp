@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="menu_labels_style">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="FloatingButtonMenuStyle">
+        <item name="fab_labelsPosition">left</item>
+        <item name="fab_labelStyle">@style/menu_labels_style</item>
+        <item name="fab_addButtonColorNormal">@color/white</item>
+        <item name="fab_addButtonPlusIconColor">@color/black</item>
+        <item name="fab_addButtonColorPressed">@color/gray_light</item>
+    </style>
+
+    <style name="FloatingButtonStyle">
+        <item name="fab_colorPressed">@color/gray_light</item>
+        <item name="fab_colorNormal">@color/white</item>
+        <item name="fab_size">mini</item>
+    </style>
+
+    <style name="ProgressBar" parent="Widget.AppCompat.ProgressBar">
+        <item name="android:progressTint">@color/black</item>
+    </style>
+
+    <style name="HorizontalProgressBar" parent="Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="android:progressTint">@color/black</item>
+    </style>
+</resources>

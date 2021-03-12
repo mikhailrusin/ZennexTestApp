@@ -1,7 +1,9 @@
 package com.mikhailrusin.zennextestapp.ui.news_list
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -34,11 +36,16 @@ class NewsListFragment : Fragment(R.layout.fragment_news_list) {
                 resources.getString(R.string.connection_error),
                 adapter::retry)
         )
-        newsViewModel.fetchNews().observe(viewLifecycleOwner, {
+        newsViewModel.fetchNews().observe(viewLifecycleOwner) {
             viewLifecycleOwner.lifecycleScope.launch {
-                it?.let { adapter.submitData(it) }
+                adapter.submitData(it)
             }
-        })
+            newsViewModel.isLoading.value = false
+        }
+        newsViewModel.isLoading.observe(viewLifecycleOwner) {
+            recycler_news.isVisible = !it
+            progressbar_news.isVisible = it
+        }
         swipe_refresh.setOnRefreshListener {
             refreshNews()
         }
